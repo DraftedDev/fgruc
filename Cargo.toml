@@ -1,0 +1,17 @@
+[package]
+name = "fgruc"
+version = "0.1.0"
+edition = "2021"
+description = "Fast graphics rendering utility collection // A fast collection of utils for graphics rendering and game making."
+keywords = ["graphics", "math", "rendering", "game-engine", "utility"]
+categories = ["game-development", "graphics", "mathematics", "rendering", "data-structures"]
+
+[dependencies]
+
+[badges]
+maintenance = { status = "experimental" }
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true
