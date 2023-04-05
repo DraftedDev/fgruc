@@ -29,6 +29,7 @@ pub fn fast_cos(x: f32) -> f32 {
 
 /// A faster implementation of tan() function.
 /// Sacrifices accuracy for speed.
+#[inline]
 pub fn fast_tan(x: f32) -> f32 {
     fast_sin(x) / fast_cos(x)
 }

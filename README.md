@@ -10,4 +10,4 @@ A lightweight and performant collection of utilities to assist in graphics stuff
 * [ ] Vertex and other structs specifically for 3d graphics rendering.
 * [ ] Physics module for interacting with gravity and checking the collision state of objects.
 * [ ] Shapes, like cubes and circles, for providing a convenient way to make up objects in a 2d/3d space.
-* [ ] Implementation of faster alternatives to sin(), cos(), tan() and more.
+* [x] Implementation of faster alternatives to sin(), cos(), tan() and more.

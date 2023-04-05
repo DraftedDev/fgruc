@@ -69,4 +69,6 @@ impl Euler {
             z: cos_pitch * cos_yaw * sin_roll - sin_pitch * sin_yaw * cos_roll,
         }
     }
+
+    // TODO: implement rotate(), rotate_around(), rotate_around_x(), rotate_around_y(), rotate_around_z(), rotate_around_xyz()
 }
