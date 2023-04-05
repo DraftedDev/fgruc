@@ -1,6 +1,6 @@
 use std::ops::{Add, Div, Mul, Sub};
 use crate::math::fast_inv_sqrt;
-use crate::rotations::quaternion::Quaternion;
+use crate::angles::quaternion::Quaternion;
 
 /// A vector with x, y, and z components.
 /// They are used to represent a point or direction in 3d space.

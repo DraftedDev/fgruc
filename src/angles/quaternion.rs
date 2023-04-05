@@ -3,10 +3,12 @@ use std::ops::{Add, Mul, Sub};
 use crate::math::{fast_inv_sqrt, fast_sin};
 
 /// A 3D quaternion with scalar and vector components.
-/// Used to represent rotations in 3D space.
+/// Used to represent angles in 3D space.
 ///
 /// Only use if you really know Quaternions inside out.
 /// Maybe use `Euler` struct instead.
+///
+/// NOTE: Some transformation functions are implemented in `Euler`, so you may need to use `Quaternion::to_euler()`.
 #[derive(Clone, Copy)]
 pub struct Quaternion {
     pub w: f32,

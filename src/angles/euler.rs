@@ -1,4 +1,6 @@
-use crate::rotations::quaternion::Quaternion;
+use crate::angles::quaternion::Quaternion;
+use crate::math::{fast_cos, fast_sin};
+use crate::types::Axis;
 
 /// A Euler Angle representing a rotation around the X, Y, and Z axes.
 /// This is just like Quaternion, but less complex.
@@ -50,7 +52,7 @@ impl Euler {
         }
     }
 
-    fn to_quaternion(&self) -> Quaternion {
+    pub fn to_quaternion(&self) -> Quaternion {
         let half_pitch = self.pitch * 0.5;
         let half_yaw = self.yaw * 0.5;
         let half_roll = self.roll * 0.5;
@@ -70,5 +72,40 @@ impl Euler {
         }
     }
 
-    // TODO: implement rotate(), rotate_around(), rotate_around_x(), rotate_around_y(), rotate_around_z(), rotate_around_xyz()
+    /// Rotate the Euler angles around the x, y, and z axes by the given angles in radians
+    fn rotate(&mut self, x_angle: f64, y_angle: f64, z_angle: f64) {
+        self.roll += x_angle;
+        self.pitch += y_angle;
+        self.yaw += z_angle;
+    }
+
+    /// Rotate the Euler angles around a given `Axis` by a given angle in radians
+    fn rotate_around(&mut self, axis: Axis, angle: f32) {
+        match axis {
+            Axis::X => {
+                let cos_angle = fast_cos(angle);
+                let sin_angle = fast_sin(angle);
+                let new_pitch = self.pitch * cos_angle - self.yaw * sin_angle;
+                let new_yaw = self.pitch * sin_angle + self.yaw * cos_angle;
+                self.pitch = new_pitch;
+                self.yaw = new_yaw;
+            },
+            Axis::Y => {
+                let cos_angle = fast_cos(angle);
+                let sin_angle = fast_sin(angle);
+                let new_roll = self.roll * cos_angle + self.yaw * sin_angle;
+                let new_yaw = -self.roll * sin_angle + self.yaw * cos_angle;
+                self.roll = new_roll;
+                self.yaw = new_yaw;
+            },
+            Axis::Z => {
+                let cos_angle = fast_cos(angle);
+                let sin_angle = fast_sin(angle);
+                let new_roll = self.roll * cos_angle - self.pitch * sin_angle;
+                let new_pitch = self.roll * sin_angle + self.pitch * cos_angle;
+                self.roll = new_roll;
+                self.pitch = new_pitch;
+            },
+        }
+    }
 }
