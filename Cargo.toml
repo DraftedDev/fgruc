@@ -7,7 +7,7 @@ keywords = ["graphics", "math", "rendering", "algebra", "utility"]
 categories = ["game-development", "graphics", "mathematics", "rendering", "data-structures"]
 authors = ["DraftedDev <https://github.com/DraftedDev>"]
 repository = "https://github.com/DraftedDev/fgruc"
-license = "MIT-License or Apache-2.0"
+license = "MIT-License OR Apache-2.0"
 readme = "README.md"
 
 [dependencies]
