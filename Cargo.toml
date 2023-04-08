@@ -2,9 +2,11 @@
 name = "fgruc"
 version = "0.1.0"
 edition = "2021"
-description = "Fast graphics rendering utility collection // A fast collection of utils for graphics rendering and game making."
-keywords = ["graphics", "math", "rendering", "game-engine", "utility"]
+description = "Fast graphics rendering utility collection // A collection of utils for graphics rendering and game making made with performance in mind."
+keywords = ["graphics", "math", "rendering", "algebra", "utility"]
 categories = ["game-development", "graphics", "mathematics", "rendering", "data-structures"]
+authors = ["DraftedDev <https://github.com/DraftedDev>"]
+repository = "https://github.com/DraftedDev/fgruc"
 
 [dependencies]
 
