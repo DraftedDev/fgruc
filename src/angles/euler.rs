@@ -31,19 +31,19 @@ impl Euler {
         let qy = q.y;
         let qz = q.z;
 
-        let mut sinr_cosp = 2.0 * (qw * qx + qy * qz);
-        let mut cosr_cosp = 1.0 - 2.0 * (qx * qx + qy * qy);
+        let sinr_cosp = 2.0 * (qw * qx + qy * qz);
+        let cosr_cosp = 1.0 - 2.0 * (qx * qx + qy * qy);
 
-        let mut sinp = 2.0 * (qw * qy - qz * qx);
-        let mut pitch: f32;
+        let sinp = 2.0 * (qw * qy - qz * qx);
+        let pitch: f32;
         if sinp.abs() >= 1.0 {
             pitch = (std::f32::consts::PI / 2.0) * sinp.signum();
         } else {
             pitch = sinp.asin();
         }
 
-        let mut siny_cosp = 2.0 * (qw * qz + qx * qy);
-        let mut cosy_cosp = 1.0 - 2.0 * (qy * qy + qz * qz);
+        let siny_cosp = 2.0 * (qw * qz + qx * qy);
+        let cosy_cosp = 1.0 - 2.0 * (qy * qy + qz * qz);
 
         Self {
             roll: sinr_cosp.atan2(cosr_cosp),
