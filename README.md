@@ -3,11 +3,18 @@ A lightweight and performant collection of utilities to assist in graphics stuff
 \
 **CAUTION: Right now fgruc is experimental and lacks most features other math crates provide!**
 
+***
+
 ### What fgruc provides:
-* [x] Vector structs with implementations of various functions for transformations in global or object-local context.
-* [x] Quaternion and Euler Angle structs with implementation of functions to define and transform them.
-* [ ] A space struct to define a "world" where Vectors and Angles may exist.
-* [ ] Vertex and other structs specifically for 3d graphics rendering.
-* [ ] Physics module for interacting with gravity and checking the collision state of objects.
-* [ ] Shapes, like cubes and circles, for providing a convenient way to make up objects in a 2d/3d space.
-* [x] Implementation of faster alternatives to sin(), cos(), tan() and more.
+* Vector and Matrix struct with full implementations of most functions and operations.
+* Universal Color and Vertex struct with full implementations of most functions and operations.
+* Optimized sin(), cos(), tan(), etc. functions and other math utils.
+* Common enums and types for operations in 2d/3d space.
+* Quaternion and Euler structs for rotations and transformations.
+
+### What fgruc does not (and will not) provide:
+* High level APIs for Vulkan, OpenGL, etc.
+* Utils for operations on the GPU.
+* Structs and utils crates like `wgpu` and `ash` provide.
+
+**[What is planned for fgruc to provide in the future](ROADMAP.md)**

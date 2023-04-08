@@ -4,6 +4,7 @@ use crate::angles::quaternion::Quaternion;
 
 /// A vector with x, y, and z components.
 /// They are used to represent a point or direction in 3d space.
+#[derive(Copy, Clone, Debug)]
 pub struct Vector3 {
     pub x: f32,
     pub y: f32,
@@ -98,6 +99,50 @@ impl Vector3 {
         Quaternion::new(w, self.x, self.y, self.z)
     }
 
+    pub fn as_bytes(&self) -> [u8; 12] {
+        let mut bytes = [0u8; 12];
+        bytes[..4].copy_from_slice(&self.x.to_ne_bytes());
+        bytes[4..8].copy_from_slice(&self.y.to_ne_bytes());
+        bytes[8..].copy_from_slice(&self.z.to_ne_bytes());
+        bytes
+    }
+
+    pub fn distance_squared(&self, other: &Self) -> f32 {
+        (other.x - self.x).powi(2) + (other.y - self.y).powi(2) + (other.z - self.z).powi(2)
+    }
+
+    pub fn midpoint(&self, other: &Self) -> Self {
+        Self {
+            x: (self.x + other.x) / 2.0,
+            y: (self.y + other.y) / 2.0,
+            z: (self.z + other.z) / 2.0,
+        }
+    }
+
+    pub fn lerp(&self, other: &Self, t: f32) -> Self {
+        *self * (1.0 - t) + *other * t
+    }
+
+}
+
+impl Mul<f32> for Vector3 {
+    type Output = Self;
+
+    fn mul(self, scalar: f32) -> Self {
+        Self {
+            x: self.x * scalar,
+            y: self.y * scalar,
+            z: self.z * scalar,
+        }
+    }
+}
+
+impl Mul<Vector3> for f32 {
+    type Output = Vector3;
+
+    fn mul(self, vector: Vector3) -> Vector3 {
+        vector * self
+    }
 }
 
 impl Add for Vector3 {
@@ -120,18 +165,6 @@ impl Sub for Vector3 {
             x: self.x - other.x,
             y: self.y - other.y,
             z: self.z - other.z,
-        }
-    }
-}
-
-impl Mul for Vector3 {
-    type Output = Vector3;
-
-    fn mul(self, other: Vector3) -> Vector3 {
-        Vector3 {
-            x: self.x * other.x,
-            y: self.y * other.y,
-            z: self.z * other.z,
         }
     }
 }

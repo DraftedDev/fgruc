@@ -73,14 +73,14 @@ impl Euler {
     }
 
     /// Rotate the Euler angles around the x, y, and z axes by the given angles in radians
-    fn rotate(&mut self, x_angle: f64, y_angle: f64, z_angle: f64) {
+    pub fn rotate(&mut self, x_angle: f32, y_angle: f32, z_angle: f32) {
         self.roll += x_angle;
         self.pitch += y_angle;
         self.yaw += z_angle;
     }
 
     /// Rotate the Euler angles around a given `Axis` by a given angle in radians
-    fn rotate_around(&mut self, axis: Axis, angle: f32) {
+    pub fn rotate_around(&mut self, axis: Axis, angle: f32) {
         match axis {
             Axis::X => {
                 let cos_angle = fast_cos(angle);

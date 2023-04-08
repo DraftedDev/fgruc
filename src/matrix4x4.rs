@@ -4,23 +4,23 @@ use crate::vectors::vector3::Vector3;
 
 /// A 4x4 matrix with 16 `f32` elements stored in column-major order.
 #[derive(Clone, Copy)]
-pub struct Matrix {
+pub struct Matrix4x4 {
     pub data: [f32; 16],
 }
 
-impl Matrix {
+impl Matrix4x4 {
 
     /// Creates a new identity Matrix.
     /// This is basically just `Matrix::identity()`.
     pub fn new() -> Self {
-        Matrix::identity()
+        Matrix4x4::identity()
     }
 
     /// Creates a new identity matrix.
     ///
     /// An identity matrix is a matrix in which all the elements of the main diagonal are 1, and all other elements are 0.
     pub fn identity() -> Self {
-        Matrix {
+        Matrix4x4 {
             data: [
                 1.0, 0.0, 0.0, 0.0,
                 0.0, 1.0, 0.0, 0.0,
@@ -32,7 +32,7 @@ impl Matrix {
 
     /// Creates a new translation matrix.
     pub fn translate(x: f32, y: f32, z: f32) -> Self {
-        Matrix {
+        Matrix4x4 {
             data: [
                 1.0, 0.0, 0.0, x,
                 0.0, 1.0, 0.0, y,
@@ -44,7 +44,7 @@ impl Matrix {
 
     /// Creates a new scaling matrix.
     pub fn scale(x: f32, y: f32, z: f32) -> Self {
-        Matrix {
+        Matrix4x4 {
             data: [
                 x, 0.0, 0.0, 0.0,
                 0.0, y, 0.0, 0.0,
@@ -56,7 +56,7 @@ impl Matrix {
 
     /// Create a new Matrix from a float array.
     pub fn from_array(data: [f32; 16]) -> Self {
-        Matrix {
+        Matrix4x4 {
             data
         }
     }
@@ -101,8 +101,8 @@ impl Matrix {
     }
 
     /// Calculates the inverse of the matrix.
-    pub fn inverse(&self) -> Option<Matrix> {
-        let mut result = Matrix::new();
+    pub fn inverse(&self) -> Option<Matrix4x4> {
+        let mut result = Matrix4x4::new();
 
         let a = self[0];
         let b = self[1];
@@ -172,7 +172,7 @@ impl Matrix {
         let y = axis.y;
         let z = axis.z;
 
-        let mut r = Matrix::new();
+        let mut r = Matrix4x4::new();
         r[0] = cos + x * x * one_minus_cos;
         r[1] = x * y * one_minus_cos + z * sin;
         r[2] = x * z * one_minus_cos - y * sin;
@@ -188,11 +188,11 @@ impl Matrix {
 
 }
 
-impl Add<Matrix> for Matrix {
-    type Output = Matrix;
+impl Add<Matrix4x4> for Matrix4x4 {
+    type Output = Matrix4x4;
 
-    fn add(self, other: Matrix) -> Matrix {
-        let mut result = Matrix::new();
+    fn add(self, other: Matrix4x4) -> Matrix4x4 {
+        let mut result = Matrix4x4::new();
         for i in 0..16 {
             result[i] = self[i] + other[i];
         }
@@ -200,11 +200,11 @@ impl Add<Matrix> for Matrix {
     }
 }
 
-impl Sub<Matrix> for Matrix {
-    type Output = Matrix;
+impl Sub<Matrix4x4> for Matrix4x4 {
+    type Output = Matrix4x4;
 
-    fn sub(self, other: Matrix) -> Matrix {
-        let mut result = Matrix::new();
+    fn sub(self, other: Matrix4x4) -> Matrix4x4 {
+        let mut result = Matrix4x4::new();
         for i in 0..16 {
             result[i] = self[i] - other[i];
         }
@@ -212,11 +212,11 @@ impl Sub<Matrix> for Matrix {
     }
 }
 
-impl Mul<Matrix> for Matrix {
-    type Output = Matrix;
+impl Mul<Matrix4x4> for Matrix4x4 {
+    type Output = Matrix4x4;
 
-    fn mul(self, other: Matrix) -> Matrix {
-        let mut result = Matrix::new();
+    fn mul(self, other: Matrix4x4) -> Matrix4x4 {
+        let mut result = Matrix4x4::new();
         for i in (0..16).step_by(4) {
             let a = self[i];
             let b = self[i + 1];
@@ -231,11 +231,11 @@ impl Mul<Matrix> for Matrix {
     }
 }
 
-impl Mul<f32> for Matrix {
-    type Output = Matrix;
+impl Mul<f32> for Matrix4x4 {
+    type Output = Matrix4x4;
 
-    fn mul(self, scalar: f32) -> Matrix {
-        let mut result = Matrix::new();
+    fn mul(self, scalar: f32) -> Matrix4x4 {
+        let mut result = Matrix4x4::new();
         for i in 0..16 {
             result[i] = self[i] * scalar;
         }
@@ -243,11 +243,11 @@ impl Mul<f32> for Matrix {
     }
 }
 
-impl Div<f32> for Matrix {
-    type Output = Matrix;
+impl Div<f32> for Matrix4x4 {
+    type Output = Matrix4x4;
 
-    fn div(self, scalar: f32) -> Matrix {
-        let mut result = Matrix::new();
+    fn div(self, scalar: f32) -> Matrix4x4 {
+        let mut result = Matrix4x4::new();
         let inv_scalar = 1.0 / scalar;
         for i in 0..16 {
             result[i] = self[i] * inv_scalar;
@@ -256,7 +256,7 @@ impl Div<f32> for Matrix {
     }
 }
 
-impl Index<usize> for Matrix {
+impl Index<usize> for Matrix4x4 {
     type Output = f32;
 
     fn index(&self, i: usize) -> &Self::Output {
@@ -264,7 +264,7 @@ impl Index<usize> for Matrix {
     }
 }
 
-impl IndexMut<usize> for Matrix {
+impl IndexMut<usize> for Matrix4x4 {
     fn index_mut(&mut self, i: usize) -> &mut Self::Output {
         &mut self.data[i]
     }
