@@ -1,7 +1,6 @@
 # Roadmap of the `fgruc` Project
 
 ### Version 0.1.1
-* Space2, Space3 structs + impl.
 * Vector4 struct + impl.
 * Model struct + impl to load 3d Models.
 * Shader struct + impl.
