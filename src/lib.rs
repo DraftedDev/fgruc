@@ -13,8 +13,5 @@ pub mod matrix4x4;
 /// Contains some types and enums like Axis
 pub mod types;
 
-/// Collection of structs and modules for defining a x-dimensional space in which Vectors and Angles may exist.
-pub mod space;
-
 /// Contains structs and functions for rendering engines.
 pub mod rendering;
